@@ -1,0 +1,97 @@
+?php
+
+
+function timeAgo(string $datetime): string {
+    $now  = new DateTime();
+    $past = new DateTime($datetime);
+
+   
+    if ($past > $now) {
+        return 'in the future';
+    }
+
+    $diff = $now->diff($past);
+
+    $units = [
+        'y' => 'year',
+        'm' => 'month',
+        'd' => 'day',
+        'h' => 'hour',
+        'i' => 'minute',
+        's' => 'second',
+    ];
+
+    foreach ($units as $prop => $label) {
+        $value = $diff->$prop;
+        if ($value > 0) {
+            return $value . ' ' . $label . ($value > 1 ? 's' : '') . ' ago';
+        }
+    }
+
+    return 'just now';
+}
+
+
+function businessDaysBetween(string $a, string $b): int {
+    $start = new DateTime($a);
+    $end   = new DateTime($b);
+
+    if ($start > $end) {
+        [$start, $end] = [$end, $start]; 
+    }
+
+    $businessDays = 0;
+    $interval     = new DateInterval('P1D');
+    $period       = new DatePeriod($start, $interval, $end);
+
+    foreach ($period as $date) {
+        
+        $dayOfWeek = (int) $date->format('N');
+        if ($dayOfWeek < 6) {
+            $businessDays++;
+        }
+    }
+
+    return $businessDays;
+}
+
+
+function age(string $dob): int {
+    $birthDate = new DateTime($dob);
+    $today     = new DateTime('today');
+
+    return $today->diff($birthDate)->y;
+}
+
+
+function nextBirthday(string $dob): string {
+    $today = new DateTime('today');
+    $born  = new DateTime($dob);
+
+
+    $next = new DateTime($today->format('Y') . '-' . $born->format('m-d'));
+
+    
+    if ($next < $today) {
+        $next->modify('+1 year');
+    }
+
+    $days = $today->diff($next)->days;
+
+    if ($days === 0) {
+        return 'today!';
+    }
+
+    return 'in ' . $days . ' day' . ($days > 1 ? 's' : '');
+}
+
+echo timeAgo('2026-10-03 13:11:00') . "\n"; 
+
+
+echo businessDaysBetween('2026-10-02', '2026-10-09') . "\n"; 
+
+
+echo age('1998-05-15') . "\n"; 
+
+
+echo nextBirthday('1998-11-19') . "\n"; 
