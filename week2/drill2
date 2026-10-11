@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<style>
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        padding: 20px 30px;
+        z-index: 10;
+        background: transparent;
+        transition: 0.4s;
+    }
+    .navbar {
+        display: flex;
+        gap: 25px;
+    }
+
+    .navbar a {
+        text-decoration: none;
+        color: white;
+        font-size: 18px;
+    }
+    .hero {
+        width: 100%;
+        height: 100vh;
+        background-image: url("hero.png");
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .hero h1 {
+        font-size: 50px;
+    }
+    header.scrolled {
+    background: white;
+    box-shadow: 0 2px 8px gray;
+}
+
+header.scrolled a {
+    color: black;
+}
+.content {
+    height: 100vh;
+    font-size: large;
+}
+</style>
+
+</head>
+
+<body>
+
+    <header>
+
+        <div class="navbar">
+            <a href="#">HOME</a>
+            <a href="#">ABOUT US</a>
+            <a href="#">CONTACT</a>
+            <a href="#">SERVICES</a>
+        </div>
+
+    </header>
+
+
+    <div class="hero">
+
+        <h1>WELCOME</h1>
+    </div>
+    <div class="content">
+        <p>The header will change its color after scrolling </p>
+    </div>
+<script>
+    window.onscroll = function() {
+        if (scrollY > 100) {
+            document.querySelector("header").classList.add("scrolled");
+        } else {
+            document.querySelector("header").classList.remove("scrolled");
+        }
+    };
+</script>
+</body>
+</html>
