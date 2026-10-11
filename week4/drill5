@@ -1,0 +1,170 @@
+<?php
+$filename = 'sales.csv';
+
+
+if (!file_exists($filename)) {
+    $file = fopen($filename, 'w');
+    fputcsv($file, ['ID', 'Date', 'Product', 'Amount', 'Region']);
+
+    $products = ['Laptop', 'Phone', 'Tablet', 'Monitor', 'Keyboard'];
+    $regions  = ['North', 'South', 'East', 'West'];
+
+    for ($i = 1; $i <= 50; $i++) {
+        $row = [
+            $i,
+            date('Y-m-d', strtotime("-" . rand(1, 30) . " days")),
+            $products[array_rand($products)],
+            rand(50, 1500),
+            $regions[array_rand($regions)]
+        ];
+        fputcsv($file, $row);
+    }
+    fclose($file);
+}
+
+
+$file = fopen($filename, 'r');
+$headers = fgetcsv($file); // Read first row as headers
+
+$data = [];
+while (($row = fgetcsv($file)) !== false) {
+    // Combine headers with row values to make associative array
+    $data[] = array_combine($headers, $row);
+}
+fclose($file);
+
+// --- STEP 3: HANDLE FILTERING ---
+$filter_region = $_GET['region'] ?? '';
+if (!empty($filter_region)) {
+    $data = array_filter($data, function ($row) use ($filter_region) {
+        return $row['Region'] === $filter_region;
+    });
+}
+
+// --- STEP 4: HANDLE SORTING ---
+$sort_column = $_GET['sort'] ?? '';
+$sort_order  = $_GET['order'] ?? 'asc';
+
+if (!empty($sort_column) && in_array($sort_column, $headers)) {
+    usort($data, function ($a, $b) use ($sort_column, $sort_order) {
+        // Numeric vs String comparison
+        if (is_numeric($a[$sort_column]) && is_numeric($b[$sort_column])) {
+            $result = $a[$sort_column] <=> $b[$sort_column];
+        } else {
+            $result = strcasecmp($a[$sort_column], $b[$sort_column]);
+        }
+        return ($sort_order === 'asc') ? $result : -$result;
+    });
+}
+
+// --- STEP 5: HANDLE CSV DOWNLOAD EXPORT ---
+if (isset($_GET['action']) && $_GET['action'] === 'download') {
+    // Send standard HTTP headers for file download
+    header('Content-Type: text/csv; charset=utf-8');
+    header('Content-Disposition: attachment; filename="filtered_sales_export.csv"');
+
+    $output = fopen('php://output', 'w');
+    fputcsv($output, $headers); // Write headers
+
+    foreach ($data as $row) {
+        fputcsv($output, $row); // Write filtered/sorted data
+    }
+
+    fclose($output);
+    exit; // Stop executing script so HTML isn't appended
+}
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sales Data Dashboard</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 30px; background: #f9f9f9; }
+        table { border-collapse: collapse; width: 100%; background: #fff; margin-top: 15px; }
+        th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+        th { background-color: #007bff; color: white; }
+        th a { color: white; text-decoration: none; display: block; }
+        th a:hover { text-decoration: underline; }
+        .controls { margin-bottom: 15px; display: flex; gap: 15px; align-items: center; }
+        .btn { background: #28a745; color: white; padding: 8px 12px; text-decoration: none; border-radius: 4px; }
+    </style>
+</head>
+<body>
+
+    <h2>Sales Data Report</h2>
+
+    <div class="controls">
+        <!-- Filter Form -->
+        <form method="GET" action="sales.php">
+            <?php if (!empty($sort_column)): ?>
+                <input type="hidden" name="sort" value="<?= htmlspecialchars($sort_column) ?>">
+                <input type="hidden" name="order" value="<?= htmlspecialchars($sort_order) ?>">
+            <?php endif; ?>
+            
+            <label for="region">Filter by Region:</label>
+            <select name="region" id="region" onchange="this.form.submit()">
+                <option value="">All Regions</option>
+                <?php foreach (['North', 'South', 'East', 'West'] as $reg): ?>
+                    <option value="<?= $reg ?>" <?= $filter_region === $reg ? 'selected' : '' ?>>
+                        <?= $reg ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+            <a href="sales.php">Reset Filters</a>
+        </form>
+
+        <!-- Download Button -->
+        <?php
+            // Build export query string maintaining active sort and filter parameters
+            $export_params = $_GET;
+            $export_params['action'] = 'download';
+            $export_url = 'sales.php?' . http_build_query($export_params);
+        ?>
+        <a href="<?= htmlspecialchars($export_url) ?>" class="btn">📥 Download Filtered CSV</a>
+    </div>
+
+    <!-- Data Table -->
+    <table>
+        <thead>
+            <tr>
+                <?php foreach ($headers as $col): 
+                    // Toggle sort direction on each click
+                    $next_order = ($sort_column === $col && $sort_order === 'asc') ? 'desc' : 'asc';
+                    
+                    $link_params = $_GET;
+                    $link_params['sort'] = $col;
+                    $link_params['order'] = $next_order;
+                    $sort_url = 'sales.php?' . http_build_query($link_params);
+                    
+                    $arrow = '';
+                    if ($sort_column === $col) {
+                        $arrow = $sort_order === 'asc' ? ' ▲' : ' ▼';
+                    }
+                ?>
+                    <th>
+                        <a href="<?= htmlspecialchars($sort_url) ?>">
+                            <?= htmlspecialchars($col) . $arrow ?>
+                        </a>
+                    </th>
+                <?php endforeach; ?>
+            </tr>
+        </thead>
+        <tbody>
+            <?php if (empty($data)): ?>
+                <tr><td colspan="<?= count($headers) ?>">No records found.</td></tr>
+            <?php else: ?>
+                <?php foreach ($data as $row): ?>
+                    <tr>
+                        <?php foreach ($row as $cell): ?>
+                            <td><?= htmlspecialchars($cell) ?></td>
+                        <?php endforeach; ?>
+                    </tr>
+                <?php endforeach; ?>
+            <?php endif; ?>
+        </tbody>
+    </table>
+
+</body>
+</html>
