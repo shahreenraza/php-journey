@@ -1,0 +1,63 @@
+<?php
+require_once 'config.php';
+session_start();
+$_SESSION['login_attempts'] ??= 0;
+$_SESSION['lockout_time'] ??= 0;
+$error = '';
+$time_passed = time() - $_SESSION['lockout_time'];
+
+if ($_SESSION['login_attempts'] >= 3) {
+    if ($time_passed < 60) {
+        $remaining = 60 - $time_passed;
+        $error = "Too many failed attempts. Try again in {$remaining} seconds.";
+    } else {
+        
+        $_SESSION['login_attempts'] = 0;
+    }
+}
+    if ($_SERVER['REQUEST_METHOD'] === 'POST'&& empty($error)) {
+     $submitted_username =trim($_POST['username'] ?? '');
+     $submitted_password =trim($_POST['password'] ?? '');
+   if ($submitted_username === $config_user['username'] && password_verify($submitted_password, $config_user['password_hash'])) {
+        $_SESSION['login_attempts'] = 0;     
+        $_SESSION['user'] = $submitted_username;
+        header('Location: dashboard.php');
+        exit;
+    } else {
+        $_SESSION['login_attempts']++;if ($_SESSION['login_attempts'] >= 3) {
+            $_SESSION['lockout_time'] = time();
+            $error = "Too many failed attempts. You are locked out for 60 seconds.";
+        } else {
+            $remaining_attempts = 3 - $_SESSION['login_attempts'];
+        $error = "Invalid username or password.";
+    }
+     }
+    }
+?>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+</head>
+<body>
+    <h2>Login Gate</h2>
+
+    <?php if (!empty($error)): ?>
+        <p style="color: red;"><?php echo htmlspecialchars($error); ?></p>
+    <?php endif; ?>
+
+    <form method="POST" action="login.php">
+        <div>
+            <label>Username:</label><br>
+            <input type="text" name="username" required>
+        </div>
+        <br>
+        <div>
+            <label>Password:</label><br>
+            <input type="password" name="password" required>
+        </div>
+        <br>
+        <button type="submit">Log In</button>
+    </form>
+</body>
+</html>
