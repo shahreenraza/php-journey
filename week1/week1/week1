@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Portfolio</title>
+</head>
+<style>
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #fdf8fb;
+    color: #1f2937;
+}
+
+.page {
+    display: grid;
+    grid-template-rows: 5rem 1fr 3.75rem;
+    grid-template-columns: 12.5rem 1fr;
+}
+
+.navbar {
+    background-color: #172554;
+    padding: 1.25rem;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 2.5rem;
+}
+
+.navbar ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 2.5rem;
+    padding: 0;
+    margin: 0;
+}
+
+.navbar li {
+    list-style: none;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.125rem;
+}
+
+.navbar a:hover {
+    color: #f9a8d4;
+}
+
+#home {
+    display: flex;
+    align-items: center;
+    gap: 3.75rem;
+    padding: 4.375rem 10%;
+    background-color: #fce7f3;
+}
+
+#home img {
+    width: 14.375rem;
+    height: 29.1875rem;
+    object-fit: cover;
+    border-radius: 1.25rem;
+    max-width: 100%;
+}
+
+.img img {
+    border-radius: 10%;
+}
+
+.intro {
+    flex: 1;
+    min-width: 0;
+}
+
+.intro h1 {
+    font-size: 2.8125rem;
+    color: #172554;
+}
+
+.intro p {
+    font-size: 1.125rem;
+    line-height: 1.6;
+}
+
+.container {
+    display: flex;
+    gap: 1.5625rem;
+    padding: 3.75rem 8%;
+}
+
+.container section {
+    flex: 1;
+    min-width: 0;
+    background-color: white;
+    padding: 1.5625rem;
+    border-radius: 0.9375rem;
+    box-shadow: 0 0.25rem 0.9375rem rgba(0, 0, 0, 0.1);
+}
+
+.container h2 {
+    color: #172554;
+}
+
+#projects {
+    padding: 3.75rem 8%;
+    background-color: #fdf8fb;
+}
+
+#projects h2 {
+    text-align: center;
+    font-size: 2.1875rem;
+    color: #172554;
+    margin-bottom: 2.1875rem;
+}
+
+.projects-cards {
+    display: flex;
+    justify-content: space-between;
+    gap: 1.875rem;
+}
+
+.card {
+    flex: 1;
+    min-width: 0;
+    padding: 1.5625rem;
+    background-color: white;
+    border-radius: 0.9375rem;
+    box-shadow: 0 0.25rem 0.9375rem rgba(0, 0, 0, 0.1);
+    border: none;
+}
+
+.card h4 {
+    color: #be185d;
+    font-size: 1.25rem;
+}
+
+.card p {
+    line-height: 1.6;
+}
+
+.card:hover {
+    transform: translateY(-0.3125rem);
+    transition: 0.3s;
+}
+
+
+/* Tablet */
+@media (max-width: 48rem) {
+
+    .navbar {
+        flex-direction: row;
+        justify-content: center;
+        gap: 0.9375rem;
+        padding: 0.9375rem 0.625rem;
+    }
+
+    .navbar ul {
+        justify-content: center;
+        gap: 0.9375rem;
+    }
+
+    .navbar a {
+        font-size: 1rem;
+    }
+
+    #home {
+        flex-direction: column;
+        text-align: center;
+        gap: 1.875rem;
+        padding: 3.125rem 6%;
+    }
+
+    #home img {
+        width: 14.375rem;
+        height: auto;
+        max-height: 29.1875rem;
+    }
+
+    .intro h1 {
+        font-size: 2.375rem;
+    }
+
+    .container {
+        flex-direction: column;
+        gap: 1.5625rem;
+        padding: 3.125rem 6%;
+    }
+
+    .container section {
+        width: 100%;
+    }
+
+    .projects-cards {
+        flex-direction: column;
+        gap: 1.5625rem;
+    }
+
+    .card {
+        width: 100%;
+    }
+
+    #projects {
+        padding: 3.125rem 6%;
+    }
+}
+
+
+/* Mobile */
+@media (max-width: 30rem) {
+
+    .navbar {
+        padding: 0.75rem 0.3125rem;
+        gap: 0.5rem;
+    }
+
+    .navbar ul {
+        width: 100%;
+        justify-content: center;
+        gap: 0.5rem;
+    }
+
+    .navbar a {
+        font-size: 0.875rem;
+        padding: 0.25rem;
+    }
+
+    #home {
+        padding: 2.5rem 5%;
+        gap: 1.5625rem;
+    }
+
+    .intro h1 {
+        font-size: 1.875rem;
+    }
+
+    .intro p {
+        font-size: 1rem;
+    }
+
+    #home img {
+        width: 12.5rem;
+        height: auto;
+    }
+
+    .container {
+        padding: 2.5rem 5%;
+        gap: 1.25rem;
+    }
+
+    .container section {
+        padding: 1.25rem;
+    }
+
+    #projects {
+        padding: 2.5rem 5%;
+    }
+
+    #projects h2 {
+        font-size: 1.875rem;
+    }
+
+    .card {
+        padding: 1.25rem;
+    }
+}
+</style>
+<body>
+    <header>
+    <div class="navbar">
+       <a href="#home">Home</a>
+       <a href="#about">About</a>
+       <a href="#skills">Skills</a>
+       <a href="#projects">Projects</a>
+       <a href="#contact">Contact</a>
+    </div>
+    </nav>
+    </header>
+   <section id="home">
+    <img src="image5.jpeg" alt="Shahreen">
+    <div class="intro">
+        <h1>Hi, I'm Shahreen Raza</h1>
+        <div class="content">
+        <p>
+            BCA Student & Aspiring Web Developer
+        </p>
+        <p>
+            I'm passionate about learning web development and
+            creating simple, responsive, and user-friendly websites.
+       </p>
+        </div>
+    </div>
+</section>
+<div class="container">
+<section id="about">
+    <div class="about me">
+        <h2>About</h2>
+        <p>I am a BCA student with an interest in web development and programming. I enjoy learning new technologies 
+            and applying my knowledge by building practical projects.
+Currently, I am improving my skills in HTML, CSS, JavaScript, PHP, and MySQL.</p>
+    </div>
+</section>
+<section id="skills">
+    <h2>Skills</h2>
+    <ul class="list">
+        <li>HTML</li>
+        <li> CSS</li>
+        <li> JavaScript</li>
+        <li> PHP</li>
+        <li> MySQL</li>
+        <li> WordPress</li>
+        <li> C Programming</li>
+    </ul>
+</section>
+
+<section id="contact">
+    <h2>Contact</h2>
+    <p>Let's Connect
+I'm always interested in learning, building 
+new projects, and exploring opportunities to grow as a developer.</p>
+</section>
+</div>
+<section id="projects">
+        <h2>Projects</h2>
+        <div class="projects-cards">
+        <div class="card">
+     <h4> Mio Amore Website Clone</h4>  
+
+<p>A website clone created using WordPress 
+as part of my web development practice.</p>
+</div>
+<div class="card">
+<h4>Library Management System</h4>
+
+ <p>A library management
+ project featuring a login page developed using HTML, CSS, PHP, and MySQL.</p>
+</div>
+<div class="card">
+<h4>Coming Soon</h4>
+
+<p>I'm currently learning and working on new projects. More projects will be added soon.</p>
+    </div>
+    </div>
+</section>
+ </body>
+ </html>
