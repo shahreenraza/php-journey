@@ -1,0 +1,31 @@
+<?php
+
+$products = [ 
+    ['name' => 'Laptop',   'category' => 'electronics', 'price' => 55000], 
+    ['name' => 'Mouse',    'category' => 'electronics', 'price' => 500], 
+    ['name' => 'Desk',     'category' => 'furniture',   'price' => 8000], 
+    ['name' => 'Chair',    'category' => 'furniture',   'price' => 4500], 
+    ['name' => 'Keyboard', 'category' => 'electronics', 'price' => 1200], 
+];
+
+echo "--- 1. GROUPED BY CATEGORY ---\n";
+print_r(array_reduce($products, function($c, $i){ $c[$i['category']][] = $i; return $c; }, []));
+
+echo "\n--- 2. TOTAL INVENTORY VALUE ---\n";
+echo array_reduce($products, fn($sum, $i) => $sum + $i['price'], 0) . "\n";
+
+echo "\n--- 3. UNDER ₹5,000 ---\n";
+print_r(array_filter($products, fn($i) => $i['price'] < 5000));
+
+echo "\n--- 4. NAMES SORTED ALPHABETICALLY ---\n";
+$names = array_column($products, 'name'); sort($names);
+print_r($names);
+
+echo "\n--- 5. MOST EXPENSIVE PER CATEGORY ---\n";
+print_r(array_reduce($products, function($c, $i){ 
+    if(!isset($c[$i['category']]) || $i['price'] > $c[$i['category']]['price']) $c[$i['category']] = $i;
+    return $c;
+}, []));
+
+echo "\n--- 6. FORMATTED PRICES ---\n";
+print_r(array_map(function($i){ $i['price'] = '₹' . number_format($i['price']); return $i; }, $products));
