@@ -1,0 +1,36 @@
+<?php
+
+/*for ($i = 1; $i <= 100; $i++) {
+    echo $i . PHP_EOL;
+}(print 1-100)
+?>
+*/
+/*for ($i = 1; $i <= 100; $i++) {
+if($i % 3==0) {
+    echo "Fizz".PHP_EOL;
+}else{
+    echo $i . PHP_EOL;(MULTIPLE OF 3 IT WILL PRINT FIZZ INSTEAD OF 3,6,9,15....)
+}
+}*/
+/*for ($i = 1; $i <= 100; $i++) {
+if($i % 5==0) {
+    echo "Buzz".PHP_EOL;
+}else{
+    echo $i . PHP_EOL;(MULTIPLE OF 5 IT WILL PRINT BUZZ INSTEAD OF 5,10,15,20....)
+}
+}*/
+for ($i = 1; $i <= 100; $i++)
+if ($i % 3 == 0 && $i % 5 == 0) { 
+   //BOTH MULTIPLE OF 3&5 MEANS 15 THEN IT WILL PRINT FIZZBUZZ INSTEAD OF 15,30,45
+    echo "FizzBuzz" . PHP_EOL; 
+} else if ($i % 3 == 0) { 
+    
+    echo "Fizz" . PHP_EOL;
+} else if ($i % 5 == 0) { 
+  
+    echo "Buzz" . PHP_EOL;
+} else { 
+  
+    echo $i . PHP_EOL;
+}
+?>
