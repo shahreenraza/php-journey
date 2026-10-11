@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clone</title>
+</head>
+<style>
+   
+  * { 
+    box-sizing: border-box; 
+    margin:0;
+    padding:0;
+  } 
+
+header {
+  background-color: #C92529; 
+  display: flex; 
+  align-items: center;      
+  justify-content: space-between; 
+  padding: 18px 8% 18px 11%;
+  width: 100%; 
+  box-sizing: border-box;
+  min-height: 94px;         
+}
+
+.logo {
+  display: flex;
+  align-items: center;       
+}
+
+.logo img {
+  height: 58px;              
+  width: auto;
+  display: block;
+}
+
+.navbar { 
+  display: flex; 
+  align-items: center;       
+  gap: 24px;                 
+} 
+
+.navbar a { 
+  color: #ffed00;           
+  text-decoration: none; 
+  font-size: 13.5px;         
+  font-weight: 500;          
+  text-transform: uppercase;
+  font-family: 'Century Gothic', 'Futura', -apple-system, sans-serif; 
+}
+
+.navbar a:hover {
+  opacity: 0.9;
+}
+
+  #home {
+    padding: 40px 60px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; 
+  }
+
+  .info { 
+    display: flex; 
+    justify-content: center; 
+    margin-bottom: 50px;
+    margin-top: 20px;
+  } 
+
+  .info h1 {
+    font-size: 48px;
+    font-weight: 500;
+    color: #111;
+  }
+
+  .box { 
+    display: flex; 
+    flex-direction: row; 
+    gap: 60px; 
+  } 
+
+  .story, .content,.words { 
+    display: flex; 
+    flex-direction: column; 
+    width: 50%; 
+    flex: 1; 
+  } 
+
+  h2 {
+    font-size: 28px;
+    color: #111;
+    margin-bottom: 25px;
+    font-weight: bold;
+  }
+
+  p{ 
+    color: #666; 
+    font-size: 16px; 
+    line-height: 1.6;
+    margin-bottom: 25px;
+  } 
+  .words h1{
+    font-size: 40px;
+    font-weight: 600;
+    color: #111;
+    padding-top: 50px;
+    padding-bottom: 30px;
+  }
+  .wow{
+    display: flex;
+    flex-direction: row; 
+    gap: 60px; 
+    width: 100%;
+  }
+  .rice{
+    font-weight: 600;
+    font-family:"Lato", Sans-serif;
+    font-size: 70px;
+    color: #111;
+    padding-bottom: 50px;
+    line-height: 1;
+  }
+  .rice h2{
+    font-size: 40px;
+    font-weight: 600;
+    color: #111;
+    padding-top: 50px;
+    padding-bottom: 30px;
+  }
+  
+  .box3{
+    display: flex;
+    flex-direction: row; 
+    gap: 60px; 
+    width: 100%;
+    
+  }
+  .stanza h2{
+    font-size: 50px;
+    font-weight: 600;
+    color: #000000;
+    padding-top: 50px;
+    padding-bottom: 30px;
+    justify-self: center;
+    font-family:"Lato", Sans-serif;
+    letter-spacing: 1;
+  }
+
+.collection {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Splits layout into two clean, even side-by-side columns */
+  column-gap: 30px;
+  row-gap: 24px;                  /* Clean vertical gap between text rows */
+  padding: 40px;
+  font-family: 'Century Gothic', -apple-system, BlinkMacSystemFont, sans-serif;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* Individual Form Fields */
+.box4 {
+  display: flex;
+  flex-direction: column;        /* Stacks label vertically above the input box */
+  gap: 8px;                      /* Clean spacing between the label text and box border */
+  width: 100%;
+}
+
+.box4 label {
+  color: #777777;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.box4 input,
+.box4 select {
+  width: 100%;
+  height: 45px;
+  padding: 0 15px;
+  font-size: 15px;
+  border: 1px solid #e0e0e0;     /* Thin gray borders as shown on top elements */
+  border-radius: 4px;
+  background-color: #ffffff;
+  box-sizing: border-box;
+  outline: none;
+  color: #333333;
+}
+
+/* Active Highlight Outline specific to your Subject input field */
+.box4 .active-dropdown {
+  border: 1.5px solid #222222 !important; /* Thick dark outline to replicate screenshot style */
+  border-radius: 5px;
+}
+
+/* Dropdown Container */
+.box4 .input-dropdown-container {
+  width: 100%;
+  position: relative;
+}
+
+/* Submit Button Alignment Box */
+.form-submit {
+  grid-column: span 2;           /* Allows the button row to align underneath fields cleanly */
+  margin-top: 10px;
+}
+
+.form-submit button {
+  background-color: #f7b538;     /* Warm golden primary brand accent color */
+  color: #222222;
+  border: none;
+  border-radius: 6px;
+  padding: 14px 28px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.form-submit button:hover {
+  background-color: #e5a427;
+}
+/* Footer Layout Container */
+.site-footer {
+  background-color: #8B1414; /* Deep, dark textured brand crimson red */
+  padding: 30px 40px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Century Gothic', -apple-system, sans-serif;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Centered content block */
+.footer-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+  width: 100%;
+}
+
+/* Base font styles for textual elements */
+.footer-content p, 
+.footer-content a, 
+.footer-content span {
+  font-size: 13px;
+  color: #ffffff;
+  text-decoration: none;
+  margin: 0;
+}
+
+/* Color definitions matching image links */
+.footer-content .orange-link {
+  color: #D3432B; /* Precise muted brownish orange */
+}
+
+.footer-content .yellow-link {
+  color: #FBB040; /* Golden yellow tone */
+}
+
+/* Middle "Locate Us" Line */
+.footer-heading {
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 500;
+  margin: 4px 0;
+  letter-spacing: 0.5px;
+}
+
+/* Bottom Row Brand Hyperlinks */
+.footer-brands {
+  display: flex;
+  gap: 12px;
+}
+
+.footer-brands a {
+  color: #FFF200; /* Luminous bright brand yellow */
+  font-size: 13.5px;
+  font-weight: 600;
+}
+
+.footer-brands a:hover {
+  text-decoration: underline;
+}
+
+/* Floating Chat Widget Box */
+.chat-widget {
+  position: absolute;
+  right: 40px;
+  background-color: #ffffff;
+  border-radius: 30px;
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+  height: 52px;
+}
+
+.chat-text {
+  color: #222222 !important;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+/* Round logo container inside chat widget */
+.chat-brand-icon .mock-logo {
+  width: 32px;
+  height: 32px;
+  background-color: #FFF200;
+  border-radius: 50%;
+  font-size: 7px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #CE1C1C;
+  text-transform: uppercase;
+}
+
+/* Language Selection Area */
+.language-dropdown {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border-left: 1px solid #e0e0e0;
+  padding-left: 12px;
+  cursor: pointer;
+}
+
+.language-dropdown .lang-text {
+  color: #888888 !important;
+  font-size: 13px;
+}
+
+.language-dropdown .arrow-down {
+  transform: rotate(180deg);
+  display: inline-block;
+  font-size: 10px;
+  color: #888888;
+  margin-bottom: 2px;
+}
+
+</style> 
+</head>
+<body> 
+  <header> 
+    <div class="logo">
+      <img src="logo2.png" width="188" height="78" alt="Logo"> 
+    </div>
+    <div class="navbar"> 
+      <a href="#home">HOME</a> 
+      <a href="#about us">ABOUT US</a> 
+      <a href="#event & bulk orders">EVENT & BULK ORDERS</a> 
+      <a href="#nutrition">NUTRITION</a> 
+      <a href="#franchise form">FRANCHISE FORM</a> 
+      <a href="#order now">ORDER NOW</a> 
+      <a href="#horchea services">HORCHEA SERVICES</a> 
+    </div> 
+  </header> 
+
+  <section id="home"> 
+    <div class="info"> 
+      <h1>The Wow! Momo Story</h1> 
+    </div> 
+
+    <div class="box"> 
+      <div class="story"> 
+        <h2>Vision & Innovation</h2> 
+        <p>Wow! Momo is one of India’s fastest-growing quick-service restaurant (QSR) brands, famed for transforming a beloved snack — the momo — into a nationwide culinary phenomenon. Founded in 2008 in Kolkata, India, by college classmates Sagar J. Daryani and Binod K. Homagai, the brand began with a modest kiosk and a bold vision: to create an unforgettable food experience that leaves every customer saying “Wow!”</p> 
+        <p>From humble beginnings with a 6’×6’ kiosk and an initial ₹30,000 investment, Wow! Momo’s approach combined passion, quality, and creativity. By offering a wide variety of momos — including steamed, fried, pan-fried, and uniquely reinvented formats such as MoBurgs (momo burgers) and momo-based desserts — the brand redefined how India enjoys this popular dumpling.</p> 
+      </div> 
+
+      <div class="content"> 
+        <h2>Growth & Expansion</h2> 
+        <p>Today the company has expanded far beyond its first outlet. The brand now operates hundreds of outlets across dozens of cities in India, with a network continuing to grow aggressively through both company-operated stores and strategic expansion plans. Industry reports note that Wow! Momo crossed 850+ stores in over 95 cities during the financial year 2025-26 — adding about 200 new outlets in that year alone.</p> 
+        <p>Wow! Momo has also diversified into multiple related brands, including Wow! China, Wow! Chicken, and Wow! Kulfi, broadening its footprint in the fast-casual dining segment while introducing localized Indian- and Asian-inspired menu innovations.</p> 
+      </div> 
+    </div> 
+    <div class="wow">
+    <div class="words">
+        <h1>
+            Redefining Chindian
+        </h1>
+        <p>After successfully building the brand Wow! Momo the brand has launched its second brand Wow! China. Wow! China is an initiative by Wow! Momo to redefine the Chindian cuisine across the country. 
+             The Chindian cuisine is the Indian version of  Chinese which is popular all over the country.</p>
+    </div>
+    <div class="box2">
+        <img src="WOW.jpg" width="650" height="433">
+    </div>
+    </div>
+    <div class="box3">
+        <div class="bowl">
+            <img src="rice.jpg" width="650" height="433">
+        </div>
+        <div class="rice">
+            <h2>Treate to the taste buds!</h2>
+            <p>Making food fun has always been our motto and innovation has always kept us ahead. 
+                 Some of our popular dishes include Khao Suey,  Spring Rolls,  Honey Potato, 
+                  Chicken Wrapped Prawns,  Chinese Bhel,  Peppery Lemon Paneer . 
+                The brand serves some exclusive rice bowls which is something that stands out on the menu.</p>
+        </div>
+    </div>
+    <div class="contact">
+        <div class="stanza">
+        <h2>Contact Us</h2>
+        </div>
+     <p><center>
+        If you have any questions about the services we 
+        provide simply use the form below. We try and 
+        respond to all queries as soon as possible.
+     </center></p>
+    </div>
+    <div class="collection">
+    <div class="box4">
+        <label>Full name</label>
+        <input type="name" id="name">
+        <label>Your email</label>
+        <input type="email" id="email">
+        </div>
+        <div class="box4">
+        <label>Your phone</label>
+        <input type="number" id="number">
+        <label>Company name</label>
+        <input type="name" id="name">
+        </div>
+        <div class="box4">
+       <div class="input-dropdown-container">
+  <label>Subject:</label>
+  <input type="text" id="choice" list="subject-choices" placeholder="Feedback">
+  <datalist id="subject-choices">
+    <option value="Feedback">
+    <option value="Queries">
+    <option value="Bookings">
+    <option value="Outdoor Caterings">
+    <option value="Corporate Tieups">
+          <option value="Franchise">
+              <option value="Others">
+  </datalist>
+</div>
+        <label>Your message</label>
+        <input type="text">
+        </div>
+        <div class="form-submit">
+        <button type="submit">Send Message</button>
+        </div>
+    </div>
+    </div>
+  </section> 
+  <footer>
+    <footer class="site-footer">
+  <div class="footer-content">
+    <p class="footer-copyright">
+      © Copyright 2026 Wow! Momo. All rights reserved | 
+      <a href="#privacy" class="orange-link">Privacy Policy</a> | 
+      <a href="#terms" class="orange-link">Terms & Conditions</a> 
+      Powered by <span class="yellow-link">Wow Momo Foods Pvt. Ltd</span>
+    </p>
+    <h4 class="footer-heading">Locate Us</h4>
+    <div class="footer-brands">
+      <a href="#wow-momo">Wow! Momo</a>
+      <a href="#wow-chicken">Wow Chicken</a>
+      <a href="#wow-china">Wow! China</a>
+      <a href="#china-belly">China Belly</a>
+    </div>
+  </div>
+  <div class="chat-widget">
+    <div class="chat-brand-icon">
+      <div class="mock-logo">wow! momo</div>
+    </div>
+    <span class="chat-text">Talk to us!</span>
+    <div class="language-dropdown">
+      <span class="flag-icon">🇺🇸</span>
+      <span class="lang-text">English</span>
+      <span class="arrow-down">⌃</span>
+    </div>
+  </div>
+
+
+  </footer>
+</body> 
+</html>
+
