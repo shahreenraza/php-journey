@@ -1,0 +1,44 @@
+<?php
+
+$students = [ 
+    ['name' => 'Amit', 'marks' => [78, 65, 88, 92, 71]],    
+    ['name' => 'Priya', 'marks' => [91, 84, 79, 95, 88]],  
+    ['name' => 'Rohit', 'marks' => [45, 52, 61, 38, 55]],  
+    ['name' => 'Sneha', 'marks' => [88, 90, 85, 77, 93]], 
+];
+// Process the data using array_map
+    $processed = array_map(function ($student) {
+    $total = array_sum($student['marks']);
+    $percentage = $total / count($student['marks']);
+    $grade = match (true) {
+        $percentage >= 90 => 'A',
+        $percentage >= 80 => 'B',
+        $percentage >= 70 => 'C',
+        $percentage >= 60 => 'D',
+        default           => 'F',
+    };
+    return [
+        'name'       => $student['name'],
+        'total'      => $total,
+        'percentage' => $percentage,
+        'grade'      => $grade,
+        'status'     => $percentage >= 50 ? 'Pass' : 'Fail'
+    ];
+},$students);
+// Process the data using array_filter
+$passed_students = array_filter($processed, function ($student) {
+    return $student['status'] === 'Pass';
+});
+echo "--- ALL PROCESSED STUDENTS ---\n";
+print_r($processed);
+
+echo "\n--- ONLY PASSED STUDENTS ---\n";
+print_r($passed_students);
+// Process the data using usort
+usort($processed, function ($studentA, $studentB) {
+    return $studentB['percentage'] <=> $studentA['percentage'];
+});
+echo "--- STUDENTS RANKED HIGHEST TO LOWEST ---\n";
+print_r($processed);
+
+
