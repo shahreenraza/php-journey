@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=
+    , initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+
+         <div class="navbar">
+        <div class="icon">
+            The Golden Whisk Bakery
+        </div>
+   
+        <a href="#Home">Home</a>
+         <a href="#About">About</a>
+         <a href="#Service">Service</a>
+         <a href="#Contact">Contact</a>
+    </div>
+    </header>
+      <div class="hero">
+    <section id="Home">
+    <div class="title">
+    <h1>Wholesome, Handcrafted 
+        Pastries Baked Fresh Every Morning</h1>
+    </div>
+<center><a href="services.html" class="btn-primary">View Our Menu</a>
+<button type="submit" class="btn-primary">Send Message</button>
+</center>
+      </div>
+      <div class="create">
+      <div class="subtitle">
+        <h3>Welcome to The Golden Whisk, your neighborhood spot for artisan breads, custom celebration cakes, and sweet
+             treats made with love and local ingredients.</h3>
+    </div>
+    <div class="img">
+             <img src="img45.jpg" width="700" height="550">
+            </div>
+            </div>
+            <div class="create">
+     <div class="content">
+        <p>Step inside and follow the aroma of
+             caramelized sugar and fresh-from-the-oven
+              sourdough. We believe that good food brings 
+              people together. That’s why we use traditional baking methods and zero preservatives to create treats that make every 
+            ordinary day feel a little more special.</p>
+     
+        </div>
+       <center> <img src="images77.jpg"></center>
+    </div>
+    <div class="About">
+        <div class="info">
+    <h1>About</h1>
+        </div>
+<section id="About">
+    <div class="title">
+         <h1>Our Story — Flour, Water, and Passion</h1>
+    </div>
+    <p> Founded in 2018, The Golden Whisk started as a small weekend passion project in a home kitchen. Head baker Evelyn Vance wanted to recreate the comforting, slow-fermented European breads she enjoyed during her travels. What began as a couple of loaves shared with neighbors quickly grew into a bustling storefront loved by the local community.</p>
+<h3>Our Core Values</h3>
+<ul>
+    <li>
+        Quality First: We source organic flour, seasonal fruits, and real dairy from nearby farms.</li>
+        <li>Time-Honoured Tradition: We never rush our dough. Good bread takes patience, time, and careful hands.</li>
+        <li>Community Core: We donate our unsold bread at the end of every day to local shelters.
+    </li>
+</ul>
+<img src="img88.webp">
+</div>
+</section>
+<div class="set">
+<h1>Service</h1>
+</div>
+<div class="site">
+    <section id="Service">
+       <div class="services-body-text">
+  <h2 class="menu-category-title">Artisan Breads</h2>
+  <div class="menu-grid">
+    <div class="menu-card">
+      <div class="menu-item-header">
+        <h3 class="menu-item-name">Signature Sourdough</h3>
+        <span class="menu-item-price">$4.50</span>
+      </div>
+      <p class="menu-item-description">Wild yeast starter, fermented for 24 hours for a perfect chewy crust.</p>
+    </div>
+    <div class="menu-card">
+      <div class="menu-item-header">
+        <h3 class="menu-item-name">Honey Whole Wheat</h3>
+        <span class="menu-item-price">$3.75</span>
+      </div>
+      <p class="menu-item-description">Soft, wholesome loaf naturally sweetened with raw local honey.</p>
+    </div>
+    <div class="menu-card">
+      <div class="menu-item-header">
+        <h3 class="menu-item-name">Rustic Baguette</h3>
+        <span class="menu-item-price">$3.00</span>
+      </div>
+      <p class="menu-item-description">Traditional French style bread with a crisp crust and soft interior.</p>
+    </div>
+
+  </div>
+ 
+
+</div>
+
+    </section>
+</div>
+<div class="contact">
+    <section id="Contact">
+        <h1> Say Hello or Place an Order</h1>
+        Contact Details:<ul>
+            <li>Phone: +1 (555) 234-5678 / +91 98765 43210</li>
+        <li>Email: hello@goldenwhiskbakery.com</li>
+        <li>Address: 123 Baker’s Lane, Sweetwater District (Opposite City Park)</li>
+        </ul>
+Operating Hours:
+<ul><li>Tue – Fri: 7:00 AM – 6:00 PM</li>
+        <li>Sat – Sun: 8:00 AM – 4:00 PM</li>
+        <li>Monday: Closed</li>
+    </ul>
+   
+    Simple Form Fields to Build: 
+    <ul>
+        <li>Full Name</li>
+        <li>Email Address</li>
+        <li>Inquiry Type (General Inquiry, Custom Cake Order, Wholesale Inquiry)</li>
+        <li>Message Box</li>
+    </ul>
+    </section>
+</div>
+<footer class="bakery-footer">
+  <div class="footer-container">
+    <div class="footer-col">
+      <h3 class="footer-logo">The Golden Whisk</h3>
+      <p class="footer-tagline">Freshly baked joy, from our oven to your hands.</p>
+      <p class="footer-copyright">&copy; 2026 The Golden Whisk Bakery. All rights reserved.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <ul class="footer-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="services.html">Our Menu</a></li>
+        <li><a href="about.html">Our Story</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Baking Hours</h4>
+      <ul class="footer-hours">
+        <li><span>Tue – Fri:</span> 7:00 AM – 6:00 PM</li>
+        <li><span>Sat – Sun:</span> 8:00 AM – 4:00 PM</li>
+        <li><span>Monday:</span> Closed</li>
+      </ul>
+    </div>
+
+  </div>
+</footer>
+</body>
+</html>
