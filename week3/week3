@@ -1,0 +1,127 @@
+<?php
+
+$posts = require 'posts.php';
+
+usort($posts, function ($a, $b) {
+    return strtotime($b['date']) - strtotime($a['date']);
+});
+
+
+$page = $_GET['page'] ?? 1;
+
+if ($page < 1) {
+    $page = 1;
+}
+
+$totalPages = ceil(count($posts) / 3);
+
+if ($page > $totalPages) {
+    $page = $totalPages;
+}
+
+$start = ($page - 1) * 3;
+
+$pagePosts = array_slice($posts, $start, 3);
+
+
+foreach ($pagePosts as $post) {
+
+    echo "<article>";
+
+    echo "<h2>";
+    echo $post['title'];
+    echo "</h2>";
+
+    echo "<small>";
+    echo $post['date'];
+    echo "</small>";
+
+    echo "<p>";
+    echo $post['excerpt'];
+    echo "</p>";
+
+    echo "</article>";
+}
+
+
+echo "<div>";
+
+for ($i = 1; $i <= $totalPages; $i++) {
+    echo "<a href='index.php?page=$i'>$i</a> ";
+}
+
+echo "</div>";
+
+
+
+<?php
+
+$posts = require 'posts.php';
+
+$slug = $_GET['slug'] ?? '';
+foreach ($posts as $post) {
+    if ($post['slug'] == $slug) {
+        echo "<h1>" . $post['title'] . "</h1>";
+    }
+}
+
+
+<?php 
+return [
+
+    [
+        'title' => 'Learning PHP',
+        'slug' => 'learning-php',
+        'date' => '2026-09-24',
+        'excerpt' => 'My first steps with PHP.',
+        'body' => 'Today I learned how PHP works and how to create basic PHP programs.',
+        'tags' => ['php', 'coding']
+    ],
+
+    [
+        'title' => 'Learning Web Development',
+        'slug' => 'learning-web',
+        'date' => '2026-09-20',
+        'excerpt' => 'My first steps with web development.',
+        'body' => 'Today I learned how websites work and how HTML, CSS and PHP are used together.',
+        'tags' => ['php', 'web']
+    ],
+
+    [
+        'title' => 'Learning CSS',
+        'slug' => 'learning-css',
+        'date' => '2026-09-18',
+        'excerpt' => 'My first steps with CSS.',
+        'body' => 'Today I learned how CSS is used to style webpages and make them look better.',
+        'tags' => ['php', 'css']
+    ],
+
+    [
+        'title' => 'Learning HTML',
+        'slug' => 'learning-html',
+        'date' => '2026-09-15',
+        'excerpt' => 'My first steps with HTML.',
+        'body' => 'Today I learned how HTML provides the structure and content of a webpage.',
+        'tags' => ['php', 'html']
+    ],
+
+    [
+        'title' => 'Learning WordPress',
+        'slug' => 'learning-wordpress',
+        'date' => '2026-09-10',
+        'excerpt' => 'My first steps with WordPress.',
+        'body' => 'Today I learned how WordPress uses themes, templates and PHP to build websites.',
+        'tags' => ['php', 'wordpress']
+    ],
+
+    [
+        'title' => 'Learning NodeJS',
+        'slug' => 'learning-nodejs',
+        'date' => '2026-09-05',
+        'excerpt' => 'My first steps with NodeJS.',
+        'body' => 'Today I learned that NodeJS allows JavaScript to run outside the browser.',
+        'tags' => ['php', 'nodejs']
+    ]
+
+];
+?>
