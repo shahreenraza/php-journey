@@ -1,0 +1,35 @@
+<?php
+$categories = [
+    ['name' => 'Electronics', 'children' => [
+        ['name' => 'Phones', 'children' => [
+            ['name' => 'Android', 'children' => []],
+            ['name' => 'iPhone', 'children' => []],
+        ]],
+        ['name' => 'Laptops', 'children' => []],
+    ]],
+    ['name' => 'Books', 'children' => []],
+];
+
+function renderMenu($categories) {
+
+    echo "<ul>";
+
+    foreach ($categories as $category) {
+
+        echo "<li>";
+        echo $category['name'];
+
+        if ($category['children']) {
+
+            renderMenu($category['children']);
+
+        }
+
+        echo "</li>";
+    }
+
+    echo "</ul>";
+}
+
+renderMenu($categories);
+?>
