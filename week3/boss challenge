@@ -1,0 +1,228 @@
+<?php
+
+$validRooms = [
+    'classroom',
+    'lab',
+    'library',
+    'canteen',
+    'office',
+    'garden',
+    'server',
+    'washroom',
+    'gate'
+];
+
+$validItems = [
+    'key',
+    'extinguisher'
+];
+$room = $_GET['room'] ?? 'classroom';
+$items = $_GET['items'] ?? '';
+
+$itemList = $items ? explode(',', $items) : [];
+
+$itemList = array_filter($itemList, function ($item) use ($validItems) {
+    return in_array($item, $validItems);
+});
+if (!in_array($room, $validRooms)) {
+    $room = 'classroom';
+}
+
+echo "<h3>🎒 Inventory</h3>";
+
+if (empty($itemList)) {
+    echo "<p>Empty</p>";
+} else {
+    echo "<ul>";
+
+    foreach ($itemList as $item) {
+
+        if ($item == "key") {
+            echo "<li>🔑 Master Key</li>";
+        }
+
+        elseif ($item == "extinguisher") {
+            echo "<li>🧯 Fire Extinguisher</li>";
+        }
+    }
+
+    echo "</ul>";
+}
+
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <head>
+
+    <title>Escape from the Angry College Canteen</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #222;
+            color: white;
+            max-width: 700px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .game {
+            background: #333;
+            padding: 25px;
+            border-radius: 10px;
+        }
+
+        a {
+            display: inline-block;
+            margin: 6px 0;
+            padding: 8px 12px;
+            background: #555;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        a:hover {
+            background: #777;
+        }
+
+        li {
+            margin: 8px 0;
+        }
+    </style>
+
+</head>
+    <title>Escape from the Angry College Canteen</title>
+</head>
+
+<body>
+<div class="game">
+    <h1>🚨 Escape from the Angry College Canteen</h1>
+
+    <?php
+
+    if ($room == "classroom") {
+        echo "<h2>📚 Classroom</h2>";
+        echo "<p>You are in the classroom. The professor left 5 minutes ago.</p>";
+    }
+
+    elseif ($room == "lab") {
+        echo "<h2>🧪 Computer Lab</h2>";
+        echo "<p>All the computers are running. Nobody knows why.</p>";
+    }
+
+    elseif ($room == "library") {
+    echo "<h2>📖 Library</h2>";
+    echo "<p>You hear a strange noise between the bookshelves.</p>";
+    echo "<p>Behind an old book, you see a 🔑 Master Key!</p>";
+    
+    echo '<a href="?room=library&items=key">Take the Master Key</a>';
+}
+
+   elseif ($room == "canteen") {
+
+    if (in_array('key', $itemList)) {
+
+        echo "<h2>☕ Canteen</h2>";
+        echo "<p>The canteen owner looks at you suspiciously.</p>";
+        echo "<p>Luckily, you have the Master Key and escape!</p>";
+
+    }
+
+    else {
+
+        echo "<h2>☕ Canteen</h2>";
+        echo "<p>😱 OH NO!</p>";
+        echo "<p>The canteen owner spotted you!</p>";
+        echo "<h1>💀 GAME OVER</h1>";
+        echo "<p>You were caught because you ate the last samosa.</p>";
+
+        echo '<a href="?room=classroom">🔄 Play Again</a>';
+    }
+}
+
+    elseif ($room == "office") {
+        echo "<h2>🏢 Principal's Office</h2>";
+        echo "<p>The principal's chair is spinning by itself.</p>";
+    }
+
+    elseif ($room == "garden") {
+        echo "<h2>🌳 College Garden</h2>";
+        echo "<p>A suspicious pigeon is watching you.</p>";
+    }
+
+   elseif ($room == "server") {
+
+    if (in_array('key', $itemList)) {
+        echo "<h2>🖥️ Server Room</h2>";
+        echo "<p>🔓 You used the Master Key and entered the Server Room!</p>";
+        echo "<p>You discover an Emergency Fire Extinguisher! 🧯</p>";
+
+        echo '<a href="?room=server&items=key,extinguisher">Take the Fire Extinguisher</a>';
+    }
+
+    else {
+        echo "<h2>🔒 Server Room</h2>";
+        echo "<p>The door is locked.</p>";
+        echo "<p>You need the 🔑 Master Key to enter.</p>";
+    }
+}
+
+    elseif ($room == "washroom") {
+        echo "<h2>🚻 Suspicious Washroom</h2>";
+        echo "<p>There is absolutely no reason for you to be here.</p>";
+    }
+elseif ($room == "gate") {
+
+    if (in_array('key', $itemList) && in_array('extinguisher', $itemList)) {
+
+        echo "<h2>🚪 Main Gate</h2>";
+        echo "<p>🔓 You have both required items!</p>";
+        echo "<p>The gate opens...</p>";
+        echo "<h1>🏆 YOU WIN!</h1>";
+        echo "<p>You escaped the college with the last samosa.</p>";
+
+    }
+
+    else {
+
+        echo "<h2>🚪 Main Gate</h2>";
+        echo "<p>🔒 The gate is locked.</p>";
+        echo "<p>You need both the 🔑 Master Key and 🧯 Fire Extinguisher.</p>";
+
+    }
+}
+    ?>
+<hr>
+
+<h3>🚪 Doors</h3>
+<a href="?room=gate&items=<?php echo urlencode($items); ?>">
+    🚪 Main Gate
+</a><br>
+<a href="?room=classroom&items=<?php echo urlencode($items); ?>">📚 Classroom</a><br>
+
+<a href="?room=lab&items=<?php echo urlencode($items); ?>">🧪 Computer Lab</a><br>
+
+<a href="?room=library&items=<?php echo urlencode($items); ?>">📖 Library</a><br>
+
+<a href="?room=canteen&items=<?php echo urlencode($items); ?>">☕ Canteen</a><br>
+
+<a href="?room=office&items=<?php echo urlencode($items); ?>">🏢 Principal's Office</a><br>
+
+<a href="?room=garden&items=<?php echo urlencode($items); ?>">🌳 College Garden</a><br>
+
+<a href="?room=server&items=<?php echo urlencode($items); ?>">🖥️ Server Room</a><br>
+
+<a href="?room=washroom&items=<?php echo urlencode($items); ?>">🚻 Suspicious Washroom</a><br>
+
+<a href="?room=gate&items=<?php echo urlencode($items); ?>">🚪 Main Gate</a><br>
+</div>
+</body>
+</html>
+
