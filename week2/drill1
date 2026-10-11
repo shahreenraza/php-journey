@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .box{
+        display: flex;
+        justify-content: center;
+        font-size: clamp(28px, 5vw, 64px);
+
+    }
+</style>
+<body>
+    <div class="box">
+    <h1>This is clamp</h1>
+    </div>
+</body>
+</html>
